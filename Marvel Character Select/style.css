@@ -1,0 +1,347 @@
+@import url("https://fonts.cdnfonts.com/css/satoshi");
+* {
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+	scroll-behavior: smooth;
+}
+html,
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	overflow: hidden;
+}
+body {
+	background: #d3def0;
+	background: repeating-linear-gradient(
+			54deg,
+			#0000 0%,
+			#0000 8%,
+			#7078a122 8%,
+			#7078a122 16%,
+			#7078a111 16%,
+			#7078a111 24%
+		),
+		repeating-linear-gradient(
+			108deg,
+			#0000 0%,
+			#0000 6%,
+			#7078a111 6%,
+			#7078a111 12%,
+			#7078a122 12%,
+			#7078a122 18%
+		),
+		linear-gradient(174deg, #d3def0 24%, #a6aed5);
+	background-size: 100% 2000px;
+	font-family: "Satoshi", sans-serif;
+	--scale: 230px;
+}
+.card-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+	padding-top: 28vh;
+	padding-bottom: 14vh;
+	overflow: hidden;
+}
+@media (max-width: 800px) {
+	html,
+	body {
+		overflow: inherit;
+	}
+	.card-container {
+		flex-direction: column;
+		gap: 80px;
+		height: fit-content;
+	}
+}
+
+.card {
+	--clr: #c63e3c;
+	--fclr: #f0ffe2;
+	&:nth-child(2) {
+		--clr: #789d40;
+		--fclr: #fefefe;
+	}
+	&:nth-child(3) {
+		--clr: #7e448f;
+		--fclr: #fefefe;
+	}
+
+	width: var(--scale);
+	height: 324px;
+	min-width: var(--scale);
+
+	&::before {
+		content: "";
+		display: block;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		width: 100%;
+		height: 107%;
+		background: var(--clr);
+		transform: skewY(-8deg);
+		box-shadow: 0 0 0 0px #f9da27, 1px 1px 3px 0px #0002,
+			12px 42px 24px -8px #0001, 10px 24px 42px 0 #0001, 1px 4px 12px 0 #0002;
+
+		transition: all 0.2s ease-in-out;
+	}
+
+	&::after {
+		content: "";
+		display: block;
+		position: absolute;
+		left: -6%;
+		right: 0;
+		top: 64%;
+		width: 112%;
+		height: 16%;
+		background: var(--clr);
+		transform: rotate(-8deg) skewX(-54deg);
+		clip-path: polygon(
+			-100% -100%,
+			200% -100%,
+			200% 200%,
+			130% 200%,
+			59% -100%,
+			-30.4% -100%,
+			41% 200%,
+			-100% 200%
+		);
+
+		box-shadow: 0 0 0 0px #f9da27;
+		scale: 0.6;
+		opacity: 0;
+		transition: all 0.2s ease-in-out;
+	}
+
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	align-items: center;
+	cursor: pointer;
+
+	margin: auto 16px;
+
+	&:hover {
+		z-index: 2;
+
+		&::before {
+			height: 112%;
+			transform: skewY(-16deg);
+			box-shadow: 0 0 0 8px #f9da27, 1px 1px 3px 0px #0002,
+				12px 42px 24px -8px #0001, 10px 24px 42px 0 #0001, 1px 4px 12px 0 #0002;
+		}
+		&::after {
+			scale: 1;
+			opacity: 1;
+			box-shadow: 0 0 0 8px #f9da27;
+		}
+	}
+
+	.content {
+		position: relative;
+		z-index: 1;
+		bottom: 0;
+		top: unset;
+		height: fit-content;
+		padding: 12px 24px 0 24px;
+		h2,
+		p {
+			margin: 0;
+			padding: 0;
+			line-height: 124%;
+			margin-bottom: 8px;
+			font-weight: 700;
+			color: var(--fclr);
+		}
+		p {
+			font-weight: 500;
+			margin-bottom: 16px;
+		}
+		&::before {
+			content: "";
+			display: block;
+			position: absolute;
+			z-index: -1;
+			bottom: -2px;
+			left: 0;
+			width: 100%;
+			height: 20px;
+			background: var(--clr);
+			box-shadow: 0 -20px 3px -3px var(--clr), 0 3px 3px -3px var(--clr);
+		}
+	}
+	.glass {
+		pointer-events: none;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 80%;
+		background: linear-gradient(transparent, var(--clr) 100%);
+		overflow: hidden;
+	}
+	.overflow {
+		pointer-events: none;
+		position: absolute;
+		width: 200%;
+		height: 200%;
+		overflow: hidden;
+		display: flex;
+		justify-content: end;
+		align-items: end;
+		clip-path: polygon(25% 0, 75% 0, 75% 100%, 25% 100%);
+	}
+	.model {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		bottom: -10%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		model-viewer {
+			position: absolute;
+			width: 500px;
+			height: 500px;
+			width: 500px;
+			height: calc((5 / 3) * var(--scale));
+			--progress-bar-color: none;
+			--progress-bar-height: 0px;
+			opacity: 0;
+			transition: filter 0.4s ease-in-out;
+			&.loaded {
+				animation: onLoad 1s ease-in forwards;
+			}
+		}
+	}
+}
+@keyframes onLoad {
+	to {
+		opacity: 1;
+	}
+}
+
+.gradient-blur {
+	position: absolute;
+	z-index: 1;
+	height: 100%;
+	inset: auto 0 0 0;
+	pointer-events: none;
+}
+.gradient-blur:nth-child(2) {
+	inset: auto 0;
+}
+.gradient-blur > div,
+.gradient-blur::before,
+.gradient-blur::after {
+	position: absolute;
+	inset: 0;
+	--p1: 0%;
+	--p2: 12.5%;
+	--p3: 25%;
+	--p4: 37.5%;
+	--p5: 50%;
+	--p6: 62.5%;
+	--p7: 75%;
+	--p8: 87.5%;
+	--p9: 100%;
+	--bclr0: #0000;
+	--bclr1: #000;
+}
+.gradient-blur::before {
+	content: "";
+	z-index: 1;
+	backdrop-filter: blur(0.5px);
+	mask: linear-gradient(
+		to bottom,
+		var(--bclr0) var(--p1),
+		var(--bclr1) var(--p2),
+		var(--bclr1) var(--p3),
+		var(--bclr0) var(--p4)
+	);
+}
+.gradient-blur > div:nth-of-type(1) {
+	z-index: 2;
+	backdrop-filter: blur(1px);
+	mask: linear-gradient(
+		to bottom,
+		var(--bclr0) var(--p2),
+		var(--bclr1) var(--p3),
+		var(--bclr1) var(--p4),
+		var(--bclr0) var(--p5)
+	);
+}
+.gradient-blur > div:nth-of-type(2) {
+	z-index: 3;
+	backdrop-filter: blur(2px);
+	mask: linear-gradient(
+		to bottom,
+		var(--bclr0) var(--p3),
+		var(--bclr1) var(--p4),
+		var(--bclr1) var(--p5),
+		var(--bclr0) var(--p6)
+	);
+}
+.gradient-blur > div:nth-of-type(3) {
+	z-index: 4;
+	backdrop-filter: blur(4px);
+	mask: linear-gradient(
+		to bottom,
+		var(--bclr0) var(--p4),
+		var(--bclr1) var(--p5),
+		var(--bclr1) var(--p6),
+		var(--bclr0) var(--p7)
+	);
+}
+.gradient-blur > div:nth-of-type(4) {
+	z-index: 5;
+	backdrop-filter: blur(8px);
+	mask: linear-gradient(
+		to bottom,
+		var(--bclr0) var(--p5),
+		var(--bclr1) var(--p6),
+		var(--bclr1) var(--p7),
+		var(--bclr0) var(--p8)
+	);
+}
+.gradient-blur > div:nth-of-type(5) {
+	z-index: 6;
+	backdrop-filter: blur(16px);
+	mask: linear-gradient(
+		to bottom,
+		var(--bclr0) var(--p6),
+		var(--bclr1) var(--p7),
+		var(--bclr1) var(--p8),
+		var(--bclr0) var(--p9)
+	);
+}
+.gradient-blur > div:nth-of-type(6) {
+	z-index: 7;
+	backdrop-filter: blur(32px);
+	mask: linear-gradient(
+		to bottom,
+		var(--bclr0) var(--p7),
+		var(--bclr1) var(--p8),
+		var(--bclr1) var(--p9)
+	);
+}
+.gradient-blur::after {
+	content: "";
+	z-index: 8;
+	backdrop-filter: blur(64px);
+	mask: linear-gradient(
+		to bottom,
+		var(--bclr0) var(--p8),
+		var(--bclr1) var(--p9)
+	);
+}
